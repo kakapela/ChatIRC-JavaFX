@@ -26,6 +26,13 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/*Co do naprawy?
+1. opisac lepiej serwer
+2. co z datą?
+3. opisać jave
+4. obsługa błędów?
+* */
+
 public class ChatController implements Initializable {
     @FXML
     private Label labelForNick;
@@ -40,7 +47,7 @@ public class ChatController implements Initializable {
     private AnchorPane mainPane;
     @FXML
     private JFXTextArea chatTextArea;
-    ClientReceive clientReceive = new ClientReceive();
+
     Connection connection= Connection.getInstance();
     UsefulFunctions usefulFunctions = new UsefulFunctions();
 
@@ -50,7 +57,7 @@ public class ChatController implements Initializable {
                 // 启动线程时先将用户名发送
                 // envoyer le nom du client quand on lance le Thread
                 PrintWriter pwr = new PrintWriter(connection.getSocket().getOutputStream(), true);
-                pwr.println(connection.getNickname()+" ");
+                pwr.println("  "+connection.getNickname()+" jest online!");
 
                 // 用套接口输入流创建一个Reader以读取其中数据
                 // créer un objet Reader en utilisant le InputStream du socket pour récupérer les données dedans
@@ -71,7 +78,7 @@ public class ChatController implements Initializable {
                     // afficher la date et le message
                     Date date = new Date();
                     DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG, Locale.FRANCE);
-                    chatTextArea.appendText(df.format(date)+ ":\n");
+                    chatTextArea.appendText("\n"+df.format(date)+ ":\n");
 
                     chatTextArea.appendText(" "+ br.readLine() + '\n');
                 }
@@ -101,11 +108,28 @@ public class ChatController implements Initializable {
         PrintWriter pw = new PrintWriter(connection.getSocket().getOutputStream(), true);
         try {
             connection.sendMessage(textField,pw);
+            chatTextArea.appendText("\n Ja:  "+ textField.getText() + "\n");
             textField.setText("");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+    @FXML
+    public void disconnect(MouseEvent event) throws IOException {
+        Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm", ButtonType.OK, ButtonType.CANCEL);
+        Window owner = ((Node) event.getTarget()).getScene().getWindow();
+        exitAlert.setContentText("Czy napewno chcesz się rozłączyć??");
+        exitAlert.initModality(Modality.APPLICATION_MODAL);
+        exitAlert.initOwner(owner);
+        exitAlert.showAndWait();
+
+        if (exitAlert.getResult() == ButtonType.OK) {
+            connection.getSocket().close();
+            Main.changeScene("sample.fxml");
+        } else {
+            exitAlert.close();
+        }
     }
 
 

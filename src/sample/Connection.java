@@ -58,34 +58,11 @@ public class Connection {
 
     public void sendMessage(JFXTextField textField, PrintWriter pw) throws IOException {
         if(socket.isConnected()){
-            pw.println(local_nickname + ": " + textField.getText());
+            pw.println(local_nickname + " :  " + textField.getText());
             pw.flush();
         }
 
     }
-    public void receiveMessage(JFXTextArea chatTextArea) {
-        Platform.runLater(()->{
-            InputStream is = null;
-            try {
-                is = socket.getInputStream();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-            String message = null;
-            try {
-                message = br.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            chatTextArea.appendText(message);
-        }  );
-
-    }
-
-
 
 
 }

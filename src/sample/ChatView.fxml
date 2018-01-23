@@ -31,5 +31,10 @@
             <Font size="19.0" />
          </font>
       </JFXButton>
+      <JFXButton layoutX="557.0" layoutY="554.0" onMouseClicked="#disconnect" style="-fx-background-color: black;" text="Rozłącz" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
