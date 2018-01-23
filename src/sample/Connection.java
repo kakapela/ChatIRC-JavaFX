@@ -1,9 +1,14 @@
 package sample;
 
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Connection {
 
@@ -58,6 +63,29 @@ public class Connection {
         }
 
     }
+    public void receiveMessage(JFXTextArea chatTextArea) {
+        Platform.runLater(()->{
+            InputStream is = null;
+            try {
+                is = socket.getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String message = null;
+            try {
+                message = br.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            chatTextArea.appendText(message);
+        }  );
+
+    }
+
+
 
 
 }
