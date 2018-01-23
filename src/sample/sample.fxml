@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="716.0" styleClass="background" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Label layoutX="681.0" layoutY="22.0" onMouseClicked="#exitProgram" styleClass="exit" stylesheets="@../style.css" text="X">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="23.0" text="Witaj na naszym chacie IRC!">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="205.0" layoutY="243.0">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+      <FontAwesomeIconView glyphName="WECHAT" layoutX="474.0" layoutY="64.0" size="50" />
+      <FontAwesomeIconView glyphName="USER" layoutX="301.0" layoutY="210.0" size="100" text="" />
+      <JFXTextField fx:id="nickname" focusColor="RED" layoutX="256.0" layoutY="303.0" maxWidth="303.0" minWidth="294.0" prefHeight="37.0" prefWidth="303.0" unFocusColor="BLACK" />
+      <Label layoutX="78.0" layoutY="302.0" text="Nickname:">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="78.0" layoutY="387.0" text="Adres IP:">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="78.0" layoutY="473.0" text="Numer portu:">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="IP_address" focusColor="RED" layoutX="256.0" layoutY="388.0" maxWidth="303.0" minWidth="294.0" prefHeight="37.0" prefWidth="303.0" />
+      <JFXTextField fx:id="port_number" focusColor="RED" layoutX="256.0" layoutY="474.0" maxWidth="303.0" minWidth="294.0" prefHeight="37.0" prefWidth="303.0" />
+      <JFXButton layoutX="241.0" layoutY="543.0" onMouseClicked="#startConnection" prefHeight="37.0" prefWidth="234.0" ripplerFill="#dd2f2f" style="-fx-background-color: black;" styleClass="start" stylesheets="@../style.css" text="Start" textFill="WHITE">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

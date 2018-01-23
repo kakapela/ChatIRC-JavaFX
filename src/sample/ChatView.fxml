@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="716.0" styleClass="background" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ChatController">
+   <children>
+      <Label layoutX="681.0" layoutY="22.0" onMouseClicked="#exitProgram" styleClass="exit" stylesheets="@../style.css" text="X">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="205.0" layoutY="243.0">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

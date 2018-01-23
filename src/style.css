@@ -1,0 +1,15 @@
+.background {
+
+    -fx-background-image: url("sample/images/background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 716 641;
+    -fx-background-position: center center;
+}
+.exit:hover {
+    -fx-text-fill: red;
+    -fx-fill: red;
+}
+.start:hover {
+    -fx-background-color:#333333 ;
+
+}
