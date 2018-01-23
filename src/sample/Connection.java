@@ -1,6 +1,8 @@
 package sample;
 
-import java.io.IOException;
+import com.jfoenix.controls.JFXTextField;
+
+import java.io.*;
 import java.net.Socket;
 
 public class Connection {
@@ -9,8 +11,14 @@ public class Connection {
     private static Connection INSTANCE;
     private Connection(){}
     private String local_nickname;
-
-
+    private Socket socket;
+    /*
+    PrintWriter pw;
+    BufferedWriter bw;
+    OutputStreamWriter osw;
+    OutputStream os;
+*/
+    DataOutputStream dos;
     public static Connection getInstance(){
         if(INSTANCE==null) INSTANCE=new Connection();
         return INSTANCE;
@@ -21,11 +29,15 @@ public class Connection {
         return local_nickname;
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     public boolean makeConnection(String IP, String port, String nickname) throws IOException {
 
         int local_port;
         local_port = Integer.parseInt(port);
-        Socket socket= new Socket(IP,local_port);
+        socket= new Socket(IP,local_port);
         local_nickname= nickname;
 
         if(socket.isConnected()){
@@ -38,4 +50,14 @@ public class Connection {
         }
 
     }
+
+    public void sendMessage(JFXTextField textField, PrintWriter pw) throws IOException {
+        if(socket.isConnected()){
+            pw.println(local_nickname + ": " + textField.getText());
+            pw.flush();
+        }
+
+    }
+
+
 }

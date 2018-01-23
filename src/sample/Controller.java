@@ -17,6 +17,7 @@ import javafx.stage.Window;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -57,10 +58,12 @@ public class Controller implements Initializable {
       String port = port_number.getText();
       String nick = nickname.getText();
       if(connection.makeConnection(ip,port,nick)) {
-          System.out.println("Polaczyles sie z serwerem. Twoj nick to" + connection.getNickname() +".");
-          System.out.println("Numer portu to" + port);
+          System.out.println("Polaczyles sie z serwerem. Twoj nick to " + connection.getNickname() +".");
+          System.out.println("Numer portu to " + port);
           Main.fadeTrans(mainPane);
           Main.changeScene("ChatView.fxml");
+
+
       }
       else {
           System.out.println("Nie udalo nam sie polaczyc :(");

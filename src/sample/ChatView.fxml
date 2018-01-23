@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -16,5 +19,17 @@
             <Font size="39.0" />
          </font>
       </Label>
+      <Label fx:id="labelForNick" layoutX="39.0" layoutY="22.0" text="Witaj ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <JFXTextArea fx:id="chatTextArea" layoutX="51.0" layoutY="85.0" maxWidth="600.0" minWidth="600.0" prefHeight="449.0" prefWidth="600.0" />
+      <JFXTextField fx:id="textField" layoutX="51.0" layoutY="556.0" maxWidth="387.0" minWidth="387.0" prefHeight="37.0" prefWidth="387.0" />
+      <JFXButton layoutX="467.0" layoutY="554.0" onMouseClicked="#send" style="-fx-background-color: black;" text="Wyślij" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
