@@ -24,7 +24,10 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <JFXTextArea fx:id="chatTextArea" layoutX="51.0" layoutY="85.0" maxWidth="600.0" minWidth="600.0" prefHeight="449.0" prefWidth="600.0" />
+      <JFXTextArea fx:id="chatTextArea" editable="false" layoutX="51.0" layoutY="85.0" maxWidth="600.0" minWidth="600.0" prefHeight="449.0" prefWidth="600.0">
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font></JFXTextArea>
       <JFXTextField fx:id="textField" layoutX="51.0" layoutY="556.0" maxWidth="387.0" minWidth="387.0" prefHeight="37.0" prefWidth="387.0" />
       <JFXButton layoutX="467.0" layoutY="554.0" onMouseClicked="#send" style="-fx-background-color: black;" text="Wyślij" textFill="WHITE">
          <font>

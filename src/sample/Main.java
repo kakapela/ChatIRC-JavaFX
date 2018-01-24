@@ -21,8 +21,8 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        stage=primaryStage;
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
@@ -30,6 +30,7 @@ public class Main extends Application {
         primaryStage.show();
 
     }
+
     public static void changeScene(String sceneName) throws IOException {
         //metoda która będzie zmieniać sceny
         //przyjmuje nazwe pliku fxml czyli naszej sceny jaka chcemy przyjac
@@ -38,6 +39,7 @@ public class Main extends Application {
         stage.setScene(new Scene(root));
 
     }
+
     public static void fadeTrans(AnchorPane e) {
 
         FadeTransition x = new FadeTransition(new Duration(1500), e);
@@ -48,7 +50,6 @@ public class Main extends Application {
         x.play();
 
     }
-
 
 
     public static void main(String[] args) {

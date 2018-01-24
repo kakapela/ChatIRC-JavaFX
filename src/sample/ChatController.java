@@ -22,99 +22,91 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/*Co do naprawy?
-1. opisac lepiej serwer
-2. co z datą?
-3. opisać jave
-4. obsługa błędów?
-* */
-
 public class ChatController implements Initializable {
     @FXML
     private Label labelForNick;
-
-
     @FXML
     private JFXTextField textField;
-
-
-
     @FXML
     private AnchorPane mainPane;
     @FXML
     private JFXTextArea chatTextArea;
 
-    Connection connection= Connection.getInstance();
+    Connection connection = Connection.getInstance();
     UsefulFunctions usefulFunctions = new UsefulFunctions();
 
-    Thread thread = new Thread(){
-        public void run(){
+    //Tworzymy watek do obslugi odbierania wiadomosci z serwera
+    Thread thread = new Thread() {
+        public void run() {
             try {
-                // 启动线程时先将用户名发送
-                // envoyer le nom du client quand on lance le Thread
-                PrintWriter pwr = new PrintWriter(connection.getSocket().getOutputStream(), true);
-                pwr.println("  "+connection.getNickname()+" jest online!");
 
-                // 用套接口输入流创建一个Reader以读取其中数据
-                // créer un objet Reader en utilisant le InputStream du socket pour récupérer les données dedans
+                //za pomoca Klasy PrintWriter wysylamy do klientow dane o tym czy ktos sie zalogowal do czatu
+                PrintWriter pwr = new PrintWriter(connection.getSocket().getOutputStream(), true);
+                pwr.println("\t\t\t\t\t" + connection.getNickname() + " jest online!");
+
+                //tym bedziemy odczytywac dane
                 BufferedReader br = new BufferedReader(new InputStreamReader(connection.getSocket().getInputStream()));
 
                 while (true) {
-                    // 一直等到套接口有新信息可以接收
-                    // attendre jusqu'à ce qu'il y a le nouveau message à recevoir dans le socket
-                    while(!connection.getSocket().isClosed() && connection.getSocket().getInputStream().available()<=0)
+                    //jezeli jestesmy polaczeni ale nie mamy co wczytac to nic nie rob
+                    while (!connection.getSocket().isClosed() && connection.getSocket().getInputStream().available() <= 0)
                         ;
 
-                    if(connection.getSocket().isClosed()){
-                        System.out.println("The client thread has been closed");
+                    if (connection.getSocket().isClosed()) {
+                        System.out.println("Watek zostal zamkniety");
                         break;
                     }
 
-                    // 打印日期和信息内容
-                    // afficher la date et le message
+                    //za pomoca klasy date pobieramy sobie aktualna date i wyswietlamy ja
                     Date date = new Date();
-                    DateFormat df = DateFormat.getTimeInstance(DateFormat.LONG, Locale.FRANCE);
-                    chatTextArea.appendText("\n"+df.format(date)+ ":\n");
+                    DateFormat df = new SimpleDateFormat("MMM dd, yyyy h:mm a", new Locale("pl", "PL"));
+                    chatTextArea.appendText("\n" + df.format(date) + ":\n");
 
-                    chatTextArea.appendText(" "+ br.readLine() + '\n');
+                    //to co odebralismy z BufferReader to zalaczamy na koncu text area
+                    chatTextArea.appendText(" " + br.readLine() + '\n');
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        };
+    };
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-   Main.fadeTrans(mainPane);
+        Main.fadeTrans(mainPane);
         usefulFunctions.menuDragged(mainPane);
 
         //ustaw nicka
         labelForNick.setText("Witaj " + connection.getNickname() + " ! Zacznij czatować już teraz!");
 
-        //connection.receiveMessage(chatTextArea);
+        //rozpocznij watek odbierania wiadomosci przez klientow
         thread.start();
 
-
     }
+
     @FXML
     public void send() throws IOException {
+//tworzymy PrintWriter do wyslania danych
         PrintWriter pw = new PrintWriter(connection.getSocket().getOutputStream(), true);
         try {
-            connection.sendMessage(textField,pw);
-            chatTextArea.appendText("\n Ja:  "+ textField.getText() + "\n");
+            connection.sendMessage(textField, pw);
+            chatTextArea.appendText("\n Ja:  " + textField.getText() + "\n");
             textField.setText("");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
+
     @FXML
     public void disconnect(MouseEvent event) throws IOException {
         Alert exitAlert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm", ButtonType.OK, ButtonType.CANCEL);
@@ -135,7 +127,7 @@ public class ChatController implements Initializable {
 
     @FXML
     public void exitProgram(MouseEvent event) {
-      usefulFunctions.exitProgram(event);
+        usefulFunctions.exitProgram(event);
 
     }
 
